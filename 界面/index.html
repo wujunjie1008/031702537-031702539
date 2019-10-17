@@ -1,5 +1,3 @@
-<script type="text/javascript"src="js/echarts.min.js"></script>
-<script type="text/javascript" src="js/treeEcharts.js"></script>
 <html>
 	<head lang = "en">
 		<meta charset="utf-8">
@@ -19,7 +17,7 @@
 			}
 			#button_group{
 			            text-align: center;
-			        }
+			}
 			/* #tubiao{
 				height: 50%;
 			} */
@@ -53,11 +51,18 @@
 			</div>
 		</div>
 		
-		<form role="form" id="searchForm">
-			<textarea class="form-control" rows="6" placeholder="请在此输入你需要生成的家族数名单" style="width:1200px; text-align:center; margin:0px auto;"></textarea>
+		<form role="form" id="searchForm" >
+			<textarea id="Form" class="form-control" rows="6" placeholder="请在此输入你需要生成的家族数名单,格式如下:
+导师：张三
+2016级博士生：天一、王二、吴五
+2015级硕士生：李四、王五、许六
+2016级硕士生：刘一、李二、李三
+2017级本科生：刘六、琪七、司四" style="width:1200px; text-align:center; margin:0px auto;"></textarea>
 		、	<div class="row">
+		
 		<div class="col-lg-1 col-lg-offset-5">
-			<input id="commit" type="submit" class="btn btn-success btn-lg"></button>
+			<button id="commit" type="button" class="btn btn-success btn-lg " onclick="draw()">生成</button>
+			<!-- <input id="commit" type="button" class="btn btn-success btn-lg" onclick="draw()">生成</button> -->
 		</div>
 		<div class="col-lg-1">
 			<button type="reset" class="btn btn-danger btn-lg">清空</button>
@@ -73,7 +78,7 @@
 		<br/>
 		
 		<div class="container" id="myCarousel">
-			<div id="carousel-example-generic" class="carousel slide">
+			<div id="carousel-example-generic" class="carousel slide" data-interval="false">
 				<ol class="carousel-indicators">
 					<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -81,20 +86,22 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="item active">
-						<div id="container" style="width:1000px;height:900px;"></div>
+						<div id="container1" style="width:800px;height:600px;"></div>
+						<script type="text/javascript"src="js/echarts.min.js"></script>
+						<script type="text/javascript" src="js/treeEcharts.js"></script>
 					</div>
 					<div class="item">
-						<div id="container" style="width:1000px;height:900px;"></div>
+						<div id="container2" style="width:800px;height:600px;"></div>
 					</div>
 					<div class="item">
-						<div id="container" style="width:1000px;height:900px;"></div>
+						<div id="container3" style="width:800px;height:600px;"></div>
 					</div>
 				</div>
 				<a href="#carousel-example-generic" class="left carousel-control" data-slide="prev"><span class="glyphicon glyphicon-chevron-left">
 				</span></a>
 				<a href="#carousel-example-generic" class="right carousel-control" data-slide="next"><span class="glyphicon glyphicon-chevron-right">									</span></a>
 			</div>
-			<div class="container" id="button_group">
+			<!-- <div class="container" id="button_group">
 				<div class="btn-group ">
 					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></button>
 					<button type="button" class="btn btn-default">1</button>
@@ -105,7 +112,7 @@
 					<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
 					
 				</div>
-			</div>
+			</div> -->
 		</div>
 		<br/>
 		<br/>

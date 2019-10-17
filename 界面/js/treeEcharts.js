@@ -16,12 +16,20 @@ var data = [
 		{name:"枫桥",value:"010202",sj:"0102"},
 		{name:"罗湖",value:"010301",sj:"0103"}
 	];
-var treeData ;
-window.onload = function(){
+var treeData;
+var id = 1;
+
+function draw(){
 	//2.处理数据
-	treeData = transData(data, 'value', 'sj', 'children');
-	//3.展示数据
-	drawTree(treeData);
+	if(document.getElementById('Form').value != "")
+	{treeData = transData(data, 'value', 'sj', 'children');}
+	//3.展示树
+	drawTree(treeData,id);
+	var searchform = document.getElementById("searchForm");
+	var form = searchform.Form.value;
+	alert(form);
+	document.getElementById('Form').value = "";
+	id = id + 1;
 }
  
 /**2.数据处理成层级关系的数据***/ 
@@ -45,8 +53,10 @@ function transData(a, idStr, pidStr, childrenStr) {
 /**
  *3. 画树
  */
-function drawTree(treeData) {
-	var  myChart = echarts.init(document.getElementById("container"));//div元素节点的对象
+function drawTree(treeData,id) {
+	if(id==1)
+	{var  myChart = echarts.init(document.getElementById("container1"));//div元素节点的对象
+	
 	myChart.setOption({
 		tooltip : {
 			trigger : 'item',
@@ -56,11 +66,11 @@ function drawTree(treeData) {
 			type : 'tree',
 			name : 'TREE_ECHARTS',
 			data : treeData,
-			top : '2%',
-			left : '10%',
-			bottom : '2%',
+			top : '5%',
+			left : '30%',
+			bottom : '5%',
 			right : '15%',
-			symbolSize : 7,
+			symbolSize : 20,
 			label : {
 				normal : {
 					position : 'left',
@@ -84,8 +94,96 @@ function drawTree(treeData) {
 		var name = params.data.name;//点击的节点的name
 		var value = params.data.value;//点击的节点的value
 		//调用点击事件
-    	clickNode(name,value);
-	}); 
+		clickNode(name,value);
+	});
+	
+	}
+	else if(id==2)
+	{
+		var  myChart = echarts.init(document.getElementById("container2"));//div元素节点的对象
+		myChart.setOption({
+			tooltip : {
+				trigger : 'item',
+				triggerOn : 'mousemove'
+			},
+			series : [ {
+				type : 'tree',
+				name : 'TREE_ECHARTS',
+				data : treeData,
+				top : '5%',
+				left : '30%',
+				bottom : '5%',
+				right : '15%',
+				symbolSize : 20,
+				label : {
+					normal : {
+						position : 'left',
+						verticalAlign : 'middle',
+						align : 'right'
+					}
+				},
+				leaves : {
+					label : {
+						position : 'right',
+						verticalAlign : 'middle',
+						align : 'left'
+					}
+				},
+				expandAndCollapse : true ,
+				initialTreeDepth : 2  //展示层级数,默认是2
+			} ]
+		});
+		//4.树绑定事件
+		 myChart.on('click', function(params) {
+			var name = params.data.name;//点击的节点的name
+			var value = params.data.value;//点击的节点的value
+			//调用点击事件
+			clickNode(name,value);
+		});
+	}
+	else if(id==3)
+	{
+		var  myChart = echarts.init(document.getElementById("container3"));//div元素节点的对象
+		myChart.setOption({
+			tooltip : {
+				trigger : 'item',
+				triggerOn : 'mousemove'
+			},
+			series : [ {
+				type : 'tree',
+				name : 'TREE_ECHARTS',
+				data : treeData,
+				top : '5%',
+				left : '30%',
+				bottom : '5%',
+				right : '15%',
+				symbolSize : 20,
+				label : {
+					normal : {
+						position : 'left',
+						verticalAlign : 'middle',
+						align : 'right'
+					}
+				},
+				leaves : {
+					label : {
+						position : 'right',
+						verticalAlign : 'middle',
+						align : 'left'
+					}
+				},
+				expandAndCollapse : true ,
+				initialTreeDepth : 2  //展示层级数,默认是2
+			} ]
+		});
+		//4.树绑定事件
+		 myChart.on('click', function(params) {
+			var name = params.data.name;//点击的节点的name
+			var value = params.data.value;//点击的节点的value
+			//调用点击事件
+			clickNode(name,value);
+		});
+	} 
 }
 //节点的点击事件
 function clickNode(name,value){
