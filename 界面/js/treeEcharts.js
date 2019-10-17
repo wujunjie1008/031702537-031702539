@@ -62,15 +62,20 @@ function draw(){
 	var form = searchform.Form.value;
 	//alert(form);
 	//处理表格
-	deal_form(form);
 	//2.处理数据
 	
 	if(document.getElementById('Form').value != "")
-	{treeData = transData(data, 'value', 'sj', 'children');}
+	{
+		deal_form(form);
+		treeData = transData(data, 'value', 'sj', 'children');
+		drawTree(treeData,id);
+		data=[];
+	}
 	//3.展示树
-	drawTree(treeData,id);
 	document.getElementById('Form').value = "";
 	id = id + 1;
+	if(id>3)
+	{id=1}
 }
  
 /**2.数据处理成层级关系的数据***/ 
