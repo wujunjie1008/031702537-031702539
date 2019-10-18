@@ -18,22 +18,19 @@
 			#button_group{
 			            text-align: center;
 			}
-			/* #tubiao{
-				height: 50%;
-			} */
 		</style>
 	</head>
 	<body>
-		
+		</div>
 		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
-					<a href="#" class="navbar-brand" id="tubiao"><img src="img/tubiao.jpg" style="height:25px;"></a>	<!-- herf可以用于点击 -->
+					<a href="#" class="navbar-brand" id="tubiao"><img src="img/tubiao.png" style="height:25px;"></a>	<!-- herf可以用于点击 -->
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
+							<li class="active"><a href="#" style="background:Navy;">Home</a></li>
 							<li><a href="#">About</a></li>
 							<li><a href="#">Contack</a></li>
 						</li>
@@ -44,39 +41,41 @@
 			
 		</div>
 		
-		<div class="container">
-			<div class="starter">
+		<div class="container" style="width: 100%; height: 55%; background-image: url(img/bg3.jpg);">
+			<div class="starter" style="color: whitesmoke;">
 				<h1>欢迎使用家族树系统</h1>
 				<p class="lead">请输入你需要分的家族数名单</p>
 			</div>
-		</div>
-		
-		<form role="form" id="searchForm" >
-			<textarea id="Form" class="form-control" rows="6" placeholder="请在此输入你需要生成的家族数名单,格式如下:
+			<form role="form" id="searchForm" style="margin: ce;">
+						<textarea id="Form" class="form-control" rows="6" placeholder="请在此输入你需要生成的家族树名单,格式如下:
 导师：张三
 2016级博士生：天一、王二、吴五
 2015级硕士生：李四、王五、许六
 2016级硕士生：刘一、李二、李三
-2017级本科生：刘六、琪七、司四" style="width:1200px; text-align:center; margin:0px auto;"></textarea>
-		、	<div class="row">
-		
-		<div class="col-lg-1 col-lg-offset-5">
-			<button id="commit" type="button" class="btn btn-success btn-lg " onclick="draw()">生成</button>
-			<!-- <input id="commit" type="button" class="btn btn-success btn-lg" onclick="draw()">生成</button> -->
+2017级本科生：刘六、琪七、司四" style="width:600px; text-align:center; margin:0px auto; resize:none;"></textarea>
+			<br/>
+					</form>
+			<div class="row">
+			<div class="col-lg-1 col-lg-offset-5">
+				<button id="commit" type="button" class="btn btn-success btn-lg " onclick="draw()">生成</button>
+				<!-- <input id="commit" type="button" class="btn btn-success btn-lg" onclick="draw()">生成</button> -->
+			</div>
+			<div class="col-lg-1">
+				<button type="reset" class="btn btn-danger btn-lg">清空</button>
+			</div>
+			</div>
 		</div>
-		<div class="col-lg-1">
-			<button type="reset" class="btn btn-danger btn-lg">清空</button>
+		
+		<div class="container" style="width: 90%; height: 20%; background-image: url(img/fg.jpg);">
 		</div>
+		
+		<br/>
+		<br/>
+		
+		<div class="starter">
+			<h2>以下是生成的家族树</h2>
+			<p class="lead" style="color: RoyalBlue;">▼</p>
 		</div>
-		</form>
-		
-		<br/>
-		
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		
 		<div class="container" id="myCarousel">
 			<div id="carousel-example-generic" class="carousel slide" data-interval="false">
 				<ol class="carousel-indicators">
