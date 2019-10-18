@@ -23,7 +23,7 @@ var id = 1;
 function deal_form(form){
 	var s = form.split(/[\n]/);
 	var patt=new RegExp("导师的导师");
-	alert(patt.test(s[0]));
+	// alert(patt.test(s[0]));
 	
 	//var gValue;
 	//var sj;
@@ -38,8 +38,8 @@ function deal_form(form){
 		
 	}
 	
-	alert(gValue);
-	alert(sj);
+	// alert(gValue);
+	// alert(sj);
 	data.push({name:s[0],value:"01",sj:"-"});
 	
 	//alert(s.length);/**/
@@ -62,7 +62,12 @@ function deal_form(form){
 		var nValue = "00";
 		for(var j=0; j<name.length; j++){
 			
-			if((name[j]=="")&&(grade[1]!=""))alert(grade[0]+"存在空姓名");
+			if((name[j]=="")&&(grade[1]!=""))
+			{
+				alert(grade[0]+"存在空姓名");
+				data = [];
+				return;
+			}
 			
 			nValue++;
 			nValue.toString();
@@ -81,41 +86,34 @@ function draw(){
 
 	
 	var count = 0;//树个数		
-	var s = form.split(/[\n][\n]/);
-	//alert(s.length);
-	/*for(var l=0; l<s.length; l++){
-		alert(s[l]);
-		}*/
-	for(var i=0; i<s.length; i++){
-		//alert(s[i]);
-		deal_form(s[i]);
-		//2.处理数据
-		
-		if(document.getElementById('Form').value != "")
-		{treeData = transData(data, 'value', 'sj', 'children');}
-		//3.展示树
-		drawTree(treeData,id);
-		document.getElementById('Form').value = "";
-		id = id + 1;
-		data = [];
-	}
-
 	//alert(form);
 	//处理表格
 	//2.处理数据
 	
 	if(document.getElementById('Form').value != "")
 	{
-		deal_form(form);
-		treeData = transData(data, 'value', 'sj', 'children');
-		drawTree(treeData,id);
-		data=[];
+		var s = form.split(/[\n][\n]/);
+		//alert(s.length);
+		/*for(var l=0; l<s.length; l++){
+			alert(s[l]);
+			}*/
+		for(var i=0; i<s.length; i++){
+			//alert(s[i]);
+			
+			deal_form(s[i]);
+			//2.处理数据
+			if(document.getElementById('Form').value != "")
+			{treeData = transData(data, 'value', 'sj', 'children');}
+			//3.展示树
+			drawTree(treeData,id);
+			id = id + 1;
+			if(id>5)
+			{id=1;}
+			data = [];
+			if(i==s.length-1){document.getElementById('Form').value = "";}
+			
+		}
 	}
-	//3.展示树
-	document.getElementById('Form').value = "";
-	id = id + 1;
-	if(id>3)
-	{id=1}
 
 }
  
@@ -271,7 +269,92 @@ function drawTree(treeData,id) {
 			clickNode(name,value);
 		});
 	} 
-	
+	else if(id==4)
+	{
+		var  myChart = echarts.init(document.getElementById("container4"));//div元素节点的对象
+		myChart.setOption({
+			tooltip : {
+				trigger : 'item',
+				triggerOn : 'mousemove'
+			},
+			series : [ {
+				type : 'tree',
+				name : 'TREE_ECHARTS',
+				data : treeData,
+				top : '5%',
+				left : '30%',
+				bottom : '5%',
+				right : '15%',
+				symbolSize : 20,
+				label : {
+					normal : {
+						position : 'left',
+						verticalAlign : 'middle',
+						align : 'right'
+					}
+				},
+				leaves : {
+					label : {
+						position : 'right',
+						verticalAlign : 'middle',
+						align : 'left'
+					}
+				},
+				expandAndCollapse : true ,
+				initialTreeDepth : 2  //展示层级数,默认是2
+			} ]
+		});
+		//4.树绑定事件
+		 myChart.on('click', function(params) {
+			var name = params.data.name;//点击的节点的name
+			var value = params.data.value;//点击的节点的value
+			//调用点击事件
+			clickNode(name,value);
+		});
+	}
+	else if(id==5)
+	{
+		var  myChart = echarts.init(document.getElementById("container5"));//div元素节点的对象
+		myChart.setOption({
+			tooltip : {
+				trigger : 'item',
+				triggerOn : 'mousemove'
+			},
+			series : [ {
+				type : 'tree',
+				name : 'TREE_ECHARTS',
+				data : treeData,
+				top : '5%',
+				left : '30%',
+				bottom : '5%',
+				right : '15%',
+				symbolSize : 20,
+				label : {
+					normal : {
+						position : 'left',
+						verticalAlign : 'middle',
+						align : 'right'
+					}
+				},
+				leaves : {
+					label : {
+						position : 'right',
+						verticalAlign : 'middle',
+						align : 'left'
+					}
+				},
+				expandAndCollapse : true ,
+				initialTreeDepth : 2  //展示层级数,默认是2
+			} ]
+		});
+		//4.树绑定事件
+		 myChart.on('click', function(params) {
+			var name = params.data.name;//点击的节点的name
+			var value = params.data.value;//点击的节点的value
+			//调用点击事件
+			clickNode(name,value);
+		});
+	}
 }
 //节点的点击事件
 /*function clickNode(name,value){
