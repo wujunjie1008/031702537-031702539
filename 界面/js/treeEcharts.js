@@ -14,18 +14,36 @@ var data = [
 		{name:"海珠",value:"010106",sj:"0101"},
 		{name:"枫溪",value:"010201",sj:"0102"},
 		{name:"枫桥",value:"010202",sj:"0102"}*/
+		//{name:"2000级本科生",value:"01010101",sj:"010101"}
 		
 	];
 var treeData;
 var id = 1;
 
 function deal_form(form){
-	
 	var s = form.split(/[\n]/);
-	//alert(s[0]);
+	var patt=new RegExp("导师的导师");
+	alert(patt.test(s[0]));
+	
+	//var gValue;
+	//var sj;
+	if(patt.test(s[0])){
+		gValue = "0100";
+		sj = "0101";
+		data.push({name:s[1],value:"0101",sj:"01"});
+	}
+	else{
+		gValue = "00";
+		sj = "01";
+		
+	}
+	
+	alert(gValue);
+	alert(sj);
 	data.push({name:s[0],value:"01",sj:"-"});
+	
 	//alert(s.length);/**/
-	var gValue = "00";
+	
 	
 	for(var i=1;i<s.length;i++){		
 		var grade = s[i].split("：");
@@ -34,14 +52,17 @@ function deal_form(form){
 		gValue++;
 		gValue.toString();
 		gValue = '0' + gValue;
-		var sj = "01";
+		
 		//alert(grade[0]+gValue+sj);
 		data.push({name:grade[0],value:'01'+gValue,sj:sj});
 		
+		if(grade[1]=="")alert("该导师没有"+grade[0]);
 		var name = grade[1].split("、");
 		//alert(name.length);
 		var nValue = "00";
 		for(var j=0; j<name.length; j++){
+			
+			if((name[j]=="")&&(grade[1]!=""))alert(grade[0]+"存在空姓名");
 			
 			nValue++;
 			nValue.toString();
@@ -50,9 +71,6 @@ function deal_form(form){
 			data.push({name:name[j],value:'01'+gValue+nValue,sj:'01'+gValue})
 		}
 	}
-	//alert(s.length);
-	
-
 }
 
 
@@ -60,6 +78,28 @@ function deal_form(form){
 function draw(){
 	var searchform = document.getElementById("searchForm");
 	var form = searchform.Form.value;
+
+	
+	var count = 0;//树个数		
+	var s = form.split(/[\n][\n]/);
+	//alert(s.length);
+	/*for(var l=0; l<s.length; l++){
+		alert(s[l]);
+		}*/
+	for(var i=0; i<s.length; i++){
+		//alert(s[i]);
+		deal_form(s[i]);
+		//2.处理数据
+		
+		if(document.getElementById('Form').value != "")
+		{treeData = transData(data, 'value', 'sj', 'children');}
+		//3.展示树
+		drawTree(treeData,id);
+		document.getElementById('Form').value = "";
+		id = id + 1;
+		data = [];
+	}
+
 	//alert(form);
 	//处理表格
 	//2.处理数据
@@ -76,6 +116,7 @@ function draw(){
 	id = id + 1;
 	if(id>3)
 	{id=1}
+
 }
  
 /**2.数据处理成层级关系的数据***/ 
@@ -230,8 +271,9 @@ function drawTree(treeData,id) {
 			clickNode(name,value);
 		});
 	} 
+	
 }
 //节点的点击事件
-function clickNode(name,value){
+/*function clickNode(name,value){
 	alert(name+'--的值：'+value);
-}
+}*/
