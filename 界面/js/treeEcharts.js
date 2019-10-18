@@ -115,10 +115,7 @@ function draw(){
 	id = id + 1;
 	if(id>3)
 	{id=1}
-//<<<<<<< HEAD
 
-//=======
-//>>>>>>> ef53b1ae38fe23a479d6a7c86dab3d1cade93d9b
 }
  
 /**2.数据处理成层级关系的数据***/ 
